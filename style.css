@@ -1,0 +1,43 @@
+:root{
+    font-family:'Courier New', Courier, monospace;
+    --bgcolor: #F7CEE2;
+}
+
+
+body{
+    background-color: var(--bgcolor);
+}
+
+header{
+    text-align: center;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+ul{
+    list-style-type: none;
+}
+
+li{
+    display: flex;
+    align-items: center;
+}
+
+.todoItem{
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+.todoCheckbox{
+    cursor: pointer;
+    accent-color: white;
+    width: 18px;
+    height: 18px;
+}
+
+
