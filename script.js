@@ -10,6 +10,19 @@ function saveTasks(){
     localStorage.setItem("tasks",JSON.stringify(tasks));
 }
 
+//function for checking &  removing empty elements
+function updateTask(input,index){
+    if(input.id == "task")  return;
+
+    if(input.value.trim()==="")
+        tasks.splice(index,1);
+    else
+        tasks[index].task = input.value;
+
+    saveTasks();
+    updateList();
+}
+
 function updateList(){
     const div = document.getElementById("list");
     
@@ -66,19 +79,12 @@ function updateList(){
 
     //remove empty tasks
     document.querySelectorAll(".todoItem").forEach((input,index)=>{
-        input.addEventListener("blur",()=>{
-            if(input.id == "task")  return;
+        input.addEventListener("blur",()=> updateTask(input,index));
 
-            if(input.value.trim() == ""){
-                tasks.splice(index,1);
-                saveTasks();
-            }
-            else{
-                task[index].task = input.value;
-                saveTasks();
-            }
-            
-            updateList();
+        input.addEventListener("keydown",(event)=>{
+            if(event.key==="Enter"){
+                updateTask(input,index);
+            }         
         });
     });
 
