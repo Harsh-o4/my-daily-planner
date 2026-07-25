@@ -1,8 +1,14 @@
 // const test = document.getElementById("test");
 
-let tasks = [
-    // {"done":false, "task": "name of task"}
-];
+// let tasks = [
+//     {"done":false, "task": "name of task"}
+// ];
+
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+function saveTasks(){
+    localStorage.setItem("tasks",JSON.stringify(tasks));
+}
 
 function updateList(){
     const div = document.getElementById("list");
@@ -11,15 +17,19 @@ function updateList(){
     let html = "";
 
     for(let i = 0; i < todo.length; ++i){
+        if(todo[i].task == "") continue;
+
         html += `<li>
                     <input type="checkbox" class="todoCheckbox" ${todo[i].done?"checked":""}>
-                    <span id="taskText" style="${todo[i].done?"text-decoration: line-through":""}">
-                        ${todo[i].task}
-                    </span>
+                    <input type="text" 
+                        class="todoItem" 
+                        value="${todo[i].task}"
+                        style="text-decoration: ${todo[i].done?"line-through":"none"}"
+                        >
                 </li>`;
     }
 
-    html += `<br><li> <input type="text" class="todoItem" id="task" placeholder="Enter Task"></li>`
+    html += `<br><li> <input type="checkbox" class="todoCheckbox"> <input type="text" class="todoItem" id="task" placeholder="Enter Task"></li>`
     div.innerHTML = html;
     
     
@@ -36,7 +46,7 @@ function updateList(){
             }
             
             tasks.push(newTask)
-            
+            saveTasks();
             updateList();
         }
     });
@@ -51,6 +61,24 @@ function updateList(){
 
             checkbox.nextElementSibling.style.textDecoration =
                 checkbox.checked ? "line-through" : "none";
+        });
+    });
+
+    //remove empty tasks
+    document.querySelectorAll(".todoItem").forEach((input,index)=>{
+        input.addEventListener("blur",()=>{
+            if(input.id == "task")  return;
+
+            if(input.value.trim() == ""){
+                tasks.splice(index,1);
+                saveTasks();
+            }
+            else{
+                task[index].task = input.value;
+                saveTasks();
+            }
+            
+            updateList();
         });
     });
 
