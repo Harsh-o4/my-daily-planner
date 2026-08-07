@@ -1,5 +1,8 @@
 # ToDo List Extension
 
+<img width="702" height="516" alt="todoExtensionScreenshot" src="https://github.com/user-attachments/assets/2e1d4d7a-54d2-486e-b036-b6b7569e2a2f" />
+
+
 A lightweight browser extension that keeps a simple task list in the popup so you can capture reminders without leaving the page.
 
 ## Features
