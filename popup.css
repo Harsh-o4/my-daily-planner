@@ -1,0 +1,132 @@
+:root{
+    --bgcolor: #a9a7a8a7;
+    --fontcolor: #444;
+
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+body{
+    margin: 0;
+    width: 300px;
+    min-height: 300px;
+    padding: 15px;
+    position: relative;
+    padding-bottom: 52px;
+
+    background-color: var(--bgcolor);
+    color: var(--fontcolor);
+}
+
+header{
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+header h1{
+    font-family: "Caveat", cursive;
+    font-size: 2rem;
+    color: var(--fontcolor);
+    margin: 0;
+}
+
+header h1::after{
+    content: "";
+    display: block;
+    width: 120px;
+    height: 3px;
+    background: white;
+    margin: 10px auto 0;
+    border-radius: 10px;
+}
+
+main{
+    width: 100%;
+}
+
+#clearAll{
+    position: absolute;
+    left: 15px;
+    bottom: 15px;
+    width: auto;
+    padding: 5px 10px;
+    border: 1px solid rgba(68, 68, 68, 0.25);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.28);
+    color: var(--fontcolor);
+    font: inherit;
+    font-size: 12px;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+    box-shadow: none;
+}
+
+#clearAll:hover{
+    background: rgba(255, 255, 255, 0.38);
+}
+
+#clearAll:focus{
+    outline: 1px solid rgba(68, 68, 68, 0.35);
+    outline-offset: 2px;
+}
+
+ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#list{
+    width: 100%;
+    max-height: 280px;
+    overflow-y: auto;
+    text-align: left;
+}
+
+li{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 6px 0;
+}
+
+.todoItem{
+    flex: 1;
+
+    background: transparent;
+    color: var(--fontcolor);
+
+    border: none;
+    outline: none;
+
+    font: inherit;
+    font-size: 15px;
+}
+
+.todoCheckbox{
+    cursor: pointer;
+    accent-color: var(--fontcolor);
+
+    width: 18px;
+    height: 18px;
+
+    flex-shrink: 0;
+}
+
+.completed{
+    text-decoration: line-through;
+}
+
+/* Scrollbar */
+
+#list::-webkit-scrollbar{
+    width: 6px;
+}
+
+#list::-webkit-scrollbar-thumb{
+    background: rgba(68,68,68,0.35);
+    border-radius: 10px;
+}
+
+#list::-webkit-scrollbar-track{
+    background: transparent;
+}

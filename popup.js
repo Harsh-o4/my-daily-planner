@@ -1,5 +1,3 @@
-// const test = document.getElementById("test");
-
 // let tasks = [
 //     {"done":false, "task": "name of task"}
 // ];
@@ -8,6 +6,21 @@ let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
 function saveTasks(){
     localStorage.setItem("tasks",JSON.stringify(tasks));
+}
+
+document.getElementById("clearAll").addEventListener("click",()=>{
+    tasks = [];
+    saveTasks();
+    updateList();
+});
+
+function escapeHtml(text){
+    return text
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
 }
 
 //function for checking &  removing empty elements
@@ -36,13 +49,13 @@ function updateList(){
                     <input type="checkbox" class="todoCheckbox" ${todo[i].done?"checked":""}>
                     <input type="text" 
                         class="todoItem" 
-                        value="${todo[i].task}"
+                        value="${escapeHtml(todo[i].task)}"
                         style="text-decoration: ${todo[i].done?"line-through":"none"}"
                         >
                 </li>`;
     }
 
-    html += `<br><li> <input type="checkbox" class="todoCheckbox"> <input type="text" class="todoItem" id="task" placeholder="Enter Task"></li>`
+    html += `<br><li> <input type="text" class="todoItem" id="task" placeholder="Enter Task"></li>`
     div.innerHTML = html;
     
     
@@ -52,10 +65,11 @@ function updateList(){
 
     inp.addEventListener("keydown",(event)=>{
         if(event.key === "Enter"){
-            // test.innerHTML = "successful access";
+            if(inp.value.trim()==="")  return;
+
             let newTask = {
                 done: false,
-                task: inp.value
+                task: inp.value.trim()
             }
             
             tasks.push(newTask)
@@ -71,6 +85,7 @@ function updateList(){
         checkbox.addEventListener("change",()=>{
 
             tasks[i].done = checkbox.checked;
+            saveTasks();
 
             checkbox.nextElementSibling.style.textDecoration =
                 checkbox.checked ? "line-through" : "none";
@@ -83,7 +98,8 @@ function updateList(){
 
         input.addEventListener("keydown",(event)=>{
             if(event.key==="Enter"){
-                updateTask(input,index);
+                event.preventDefault();
+                input.blur();
             }         
         });
     });
