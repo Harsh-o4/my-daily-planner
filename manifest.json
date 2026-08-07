@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Todo",
+  "name": "ToDo List",
   "version": "1.0",
-  "description": "A minimal todo extension.",
+  "description": "A minimal extension of a ToDo list that helps you remember your tasks without having to close the browser.",
 
   "action": {
     "default_popup": "popup.html",
