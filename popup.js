@@ -52,6 +52,7 @@ function updateList(){
                         value="${escapeHtml(todo[i].task)}"
                         style="text-decoration: ${todo[i].done?"line-through":"none"}"
                         >
+                    <button type="button" class="removeTask" aria-label="Remove task">X</button>
                 </li>`;
     }
 
@@ -89,6 +90,14 @@ function updateList(){
 
             checkbox.nextElementSibling.style.textDecoration =
                 checkbox.checked ? "line-through" : "none";
+        });
+    });
+
+    document.querySelectorAll(".removeTask").forEach((button,index)=>{
+        button.addEventListener("click",()=>{
+            tasks.splice(index,1);
+            saveTasks();
+            updateList();
         });
     });
 
